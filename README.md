@@ -1,1 +1,1 @@
-# artem_snadin
+Homeworks of MLOps course
