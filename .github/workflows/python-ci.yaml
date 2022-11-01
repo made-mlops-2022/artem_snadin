@@ -8,6 +8,8 @@ on:
 
   pull_request:
     branches: [ homework1 ]
+    paths:
+      - 'homework1/**'
 
 jobs:
   build:
