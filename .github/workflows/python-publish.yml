@@ -5,7 +5,7 @@ on:
     tags:
       - '*'
     paths:
-      - 'nomework1/**'
+      - homework1/**
 
 jobs:
   deploy:
