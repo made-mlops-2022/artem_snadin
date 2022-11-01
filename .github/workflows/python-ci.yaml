@@ -4,12 +4,12 @@ on:
   push:
     branches: [ homework1 ]
     paths:
-      - 'homework1 / **'
+      - '** / homework1 / **'
 
   pull_request:
     branches: [ homework1 ]
     paths:
-      - 'homework1 / **'
+      - '** / homework1 / **'
 
 jobs:
   build:
