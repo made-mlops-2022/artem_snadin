@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - '*'
+    paths:
+      - 'nomework1/**'
 
 jobs:
   deploy:
