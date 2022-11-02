@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - '*'
-    paths:
-      - homework1/**
 
 jobs:
   deploy:
@@ -18,11 +16,14 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+        working-directory: ./homework1
     - name: Install dependencies
+      working-directory: ./homework1
       run: |
         python -m pip install --upgrade pip
         pip install setuptools wheel twine
     - name: Build and publish
+      working-directory: ./homework1
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_KABANINE }}
       run: |
