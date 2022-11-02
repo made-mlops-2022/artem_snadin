@@ -1,0 +1,7 @@
+input_data_path: "data/raw/train.csv"
+downloading_params:
+  storage: "https://drive.google.com/uc?export=download&id=1kDva3a99Y_k-TFvVL5YhvtvjhmkFFPgW"
+  output_folder: "data/raw/"
+train_params:
+  model_type: "RandomForestRegressor"
+
