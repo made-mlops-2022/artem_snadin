@@ -1,16 +1,13 @@
 import json
-import logging.config
 import os
 import sys
 from pathlib import Path
-
 import click
 import pandas as pd
 from params import read_pipeline_params
-
 from data import download_data, read_data, split_train_val_data
-
 from local_configs import logger_config
+import logging.config
 
 logging.config.dictConfig(logger_config)
 logger = logging.getLogger("file_logger")
@@ -39,16 +36,17 @@ def run_train_pipeline(pipeline_params):
     logger.info(f"start pipeline with params {pipeline_params}")
     data = read_data(pipeline_params.input_data_path)
     logger.info(f"data.shape is {data.shape}")
-    print(data)
 
-
-print("aaa")
+    train_df, val_df = split_train_val_data(
+        data, pipeline_params.splitting_params
+    )
+    print(f"train df shape: {train_df.shape}")
+    print(f"val df shape: {val_df.shape}")
 
 
 @click.command(name="train_pipeline")
 @click.argument("config_path")
 def train_pipeline_start(config_path: str):
-    print(f"read pipeline params from {config_path}")
     train_pipeline(config_path)
 
 

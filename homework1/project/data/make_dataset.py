@@ -4,7 +4,10 @@ import os
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from params import SplittingParams
+try:
+    from params import SplittingParams
+except ModuleNotFoundError:
+    from ..params import SplittingParams
 
 import wget
 
