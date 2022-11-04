@@ -8,3 +8,4 @@ wget~=3.2
 pandas~=1.3.5
 click~=8.1.3
 numpy~=1.21.6
+marshmallow_dataclass~=8.5.9
