@@ -11,10 +11,12 @@ setup(
     version="1.0.0",
     description="My project for MLOps",
     author="Artem Snadin student of MADE 2022",
+    author_email="artemsnad@rambler.ru",
     entry_points={
         "console_scripts": [
-            "model_train = project.train_pipeline:train_pipeline_start"
+            "model_train = project.pipeline:train_pipeline_start"
         ]
     },
     install_requires=required,
+    license="MIT",
 )

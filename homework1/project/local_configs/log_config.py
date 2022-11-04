@@ -13,7 +13,7 @@ logger_config = {
         "file_handler": {
             "class": "logging.FileHandler",
             "level": "DEBUG",
-            "filename": "../logs/model.log",
+            "filename": "logs/model.log",
             "formatter": "simple",
         },
     },

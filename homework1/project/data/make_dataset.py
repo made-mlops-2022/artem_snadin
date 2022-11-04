@@ -14,6 +14,8 @@ def download_data(storage: str, output: str) -> NoReturn:
         wget.download(storage, output)
     except FileExistsError:
         pass
+    except ConnectionResetError:
+        download_data(storage, output)
 
 
 def read_data(path: str) -> pd.DataFrame:
