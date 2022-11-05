@@ -54,9 +54,3 @@ Project Organization
     └── params             <- model parameters schemas
 
 
-
---------
-Описание проекта:
-~~~
-
-~~~
