@@ -1,0 +1,31 @@
+input_data_path: "project/data/raw/dataset.csv"
+downloading_params:
+  storage: "https://drive.google.com/uc?export=download&id=1kDva3a99Y_k-TFvVL5YhvtvjhmkFFPgW"
+  output_folder: "project/data/raw"
+  filename: "dataset.csv"
+train_params:
+  model: "LinearRegression"
+  model_types: ["RandomForestRegressor", "LinearRegression"]
+  random_state: 255
+  metrics: "all"
+splitting_params:
+  val_size: 0.4
+  random_state: 3
+feature_params:
+  categorical_features:
+    - "age"
+    - "sex"
+    - "cp"
+    - "fbs"
+    - "restecg"
+    - "exang"
+    - "slope"
+    - "ca"
+    - "thal"
+  numerical_features:
+    - "trestbps"
+    - "chol"
+    - "thalach"
+    - "oldpeak"
+  target_col: "condition"
+

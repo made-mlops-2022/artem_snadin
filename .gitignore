@@ -127,3 +127,17 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Idea files
+../../.DS_Store
+../.DS_Store
+../.idea/
+../project/.DS_Store
+../project/data/.DS_Store
+.DS_Store
+homework1/.DS_Store
+homework1/.idea/
+homework1/project/.DS_Store
+homework1/project/data/.DS_Store
+homework1/configs/.DS_Store
+homework1/project/data/raw/
