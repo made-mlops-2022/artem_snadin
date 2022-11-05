@@ -1,9 +1,11 @@
 from dataclasses import dataclass
-from .downloading_params import DownloadParams
-from .train_params import TrainParams
-from .splitting_params import SplittingParams
-from marshmallow_dataclass import class_schema
+
 import yaml
+from marshmallow_dataclass import class_schema
+
+from .downloading_params import DownloadParams
+from .splitting_params import SplittingParams
+from .train_params import TrainParams
 
 
 @dataclass()
