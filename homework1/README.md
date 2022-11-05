@@ -1,17 +1,15 @@
-ml_example
+project
 ==============================
 
-Example of ml project
+My simple ml project for MLOPS course.
 
 Installation: 
 ~~~
-python -m venv .venv
-source .venv/bin/activate
 pip install -r requirements.txt
 ~~~
 Usage:
 ~~~
-python ml_example/train_pipeline.py configs/train_config.yaml
+python project/pipeline.py configs/train_config_01.yaml
 ~~~
 
 Test:
@@ -23,32 +21,26 @@ Project Organization
 ------------
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── README.md          <- The top-level README for developers using this project.
+    │
+    ├── data               <- Different datasets.
+    │   │
+    │   └── raw            <- The original, immutable data dump.
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    ├── notebooks          <- Jupyter notebooks with data analysis.
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── ml_example                <- Source code for use in this project.
+    │
+    ├── tests              <- tests for project modules
+    │ 
+    ├── project            <- Source code for use in this project.
+    │   │
     │   ├── __init__.py    <- Makes src a Python module
     │   │
     │   ├── data           <- code to download or generate data
@@ -57,17 +49,14 @@ Project Organization
     │   │
     │   ├── models         <- code to train models and then use trained models to make
     │   │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    │   ├── local_configs  <- configs for logger
+    │   │
+    └── params             <- model parameters schemas
+
 
 
 --------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
-
-
-DOCKER:
+Описание проекта:
 ~~~
-python setup.py sdist
-docker build -t mikhailmar/train_made:v1 
-docker run -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} mikhailmar/train_made:v1
+
 ~~~
