@@ -1,16 +1,7 @@
-from .ml_model import (
-    train_model,
-    serialize_model,
-    predict_model,
-    evaluate_model,
-)
-
+from .ml_model import Model
 from .model_manager import ModelManager
 
 __all__ = [
-    "train_model",
-    "serialize_model",
-    "evaluate_model",
-    "predict_model",
-    "ModelManager"
+    "Model",
+    "ModelManager",
 ]

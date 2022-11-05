@@ -4,10 +4,28 @@ downloading_params:
   output_folder: "project/data/raw"
   filename: "dataset.csv"
 train_params:
-  model: "RandomForestRegressor"
+  model: "LinearRegression"
   model_types: ["RandomForestRegressor", "LinearRegression"]
   random_state: 255
+  metrics: "all"
 splitting_params:
-  val_size: 0.2
+  val_size: 0.4
   random_state: 3
+feature_params:
+  categorical_features:
+    - "age"
+    - "sex"
+    - "cp"
+    - "fbs"
+    - "restecg"
+    - "exang"
+    - "slope"
+    - "ca"
+    - "thal"
+  numerical_features:
+    - "trestbps"
+    - "chol"
+    - "thalach"
+    - "oldpeak"
+  target_col: "condition"
 

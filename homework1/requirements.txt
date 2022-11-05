@@ -10,3 +10,4 @@ numpy~=1.21.6
 seaborn~=0.12.1
 matplotlib~=3.5.3
 marshmallow_dataclass~=8.5.9
+pytest~=7.1.3

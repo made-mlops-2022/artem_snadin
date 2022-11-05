@@ -4,9 +4,10 @@ import sys
 from pathlib import Path
 import click
 import pandas as pd
+from features import extract_target, build_transformer, make_features
 from params import read_pipeline_params
 from data import download_data, read_data, split_train_val_data
-from models import ModelManager
+from models import ModelManager, Model
 from local_configs import logger_config
 import logging.config
 
@@ -36,7 +37,7 @@ def run_train_pipeline(pipeline_params):
                 output_path)
     logger.info(f"start pipeline with params {pipeline_params}")
     data = read_data(pipeline_params.input_data_path)
-    logger.info(f"data.shape is {data.shape}")
+    logger.info(f"dataset shape is {data.shape}")
 
     train_params = pipeline_params.train_params
     if train_params:
@@ -45,6 +46,7 @@ def run_train_pipeline(pipeline_params):
             ModelManager.load_models(train_params)
         except ValueError as ex:
             logger.error(f"model {ex} throw exception")
+            return
     else:
         logger.error("training parameters not found")
         return
@@ -54,8 +56,27 @@ def run_train_pipeline(pipeline_params):
     train_df, val_df = split_train_val_data(
         data, pipeline_params.splitting_params
     )
-    print(f"train df shape: {train_df.shape}")
-    print(f"val df shape: {val_df.shape}")
+
+    val_target = extract_target(val_df, pipeline_params.feature_params)
+    train_target = extract_target(train_df, pipeline_params.feature_params)
+    train_df = train_df.drop(columns=pipeline_params.feature_params.target_col)
+    val_df = val_df.drop(columns=pipeline_params.feature_params.target_col)
+
+    logger.info(f"train dataframe shape is {train_df.shape}")
+    logger.info(f"validation dataframe shape is {val_df.shape}")
+
+    transformer = build_transformer(pipeline_params.feature_params)
+    transformer.fit(train_df)
+    train_features = make_features(transformer, train_df)
+
+    logger.info(f"train features shape is {train_features.shape}")
+
+    model = Model(ModelManager.get_model(train_params.model), train_params)
+    model.train(train_features, train_target)
+    model.create_inference_pipeline(transformer)
+    predicts = model.predict(val_df)
+    metrics = model.evaluate(predicts, val_target)
+    logger.info(f"metrics: {metrics}")
 
 
 @click.command(name="train_pipeline")
