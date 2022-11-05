@@ -4,7 +4,8 @@ downloading_params:
   output_folder: "project/data/raw"
   filename: "dataset.csv"
 train_params:
-  model_type: "RandomForestRegressor"
+  model: "RandomForestRegressor"
+  model_types: ["RandomForestRegressor", "LinearRegression"]
   random_state: 255
 splitting_params:
   val_size: 0.2

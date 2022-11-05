@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass()
 class TrainParams:
-    model_type: str
+    model_types: List[str]
     random_state: int
+    model: str

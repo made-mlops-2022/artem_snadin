@@ -6,6 +6,7 @@ import click
 import pandas as pd
 from params import read_pipeline_params
 from data import download_data, read_data, split_train_val_data
+from models import ModelManager
 from local_configs import logger_config
 import logging.config
 
@@ -36,6 +37,19 @@ def run_train_pipeline(pipeline_params):
     logger.info(f"start pipeline with params {pipeline_params}")
     data = read_data(pipeline_params.input_data_path)
     logger.info(f"data.shape is {data.shape}")
+
+    train_params = pipeline_params.train_params
+    if train_params:
+        logger.info(f"load models with {train_params}")
+        try:
+            ModelManager.load_models(train_params)
+        except ValueError as ex:
+            logger.error(f"model {ex} throw exception")
+    else:
+        logger.error("training parameters not found")
+        return
+
+    logger.info(f"loaded models: {ModelManager.get_models()}")
 
     train_df, val_df = split_train_val_data(
         data, pipeline_params.splitting_params

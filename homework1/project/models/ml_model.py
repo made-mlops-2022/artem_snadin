@@ -8,29 +8,25 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from sklearn.pipeline import Pipeline
+from .model_manager import ModelManager
 
-from ..params import TrainParams
-
-SklearnRegressionModel = Union[RandomForestRegressor, LinearRegression]
+try:
+    from params import TrainParams
+except ModuleNotFoundError:
+    from ..params import TrainParams
 
 
 def train_model(
-    features: pd.DataFrame, target: pd.Series, train_params: TrainParams
-) -> SklearnRegressionModel:
-    if train_params.model_type == "RandomForestRegressor":
-        model = RandomForestRegressor(
-            n_estimators=100, random_state=train_params.random_state
-        )
-    elif train_params.model_type == "LinearRegression":
-        model = LinearRegression()
-    else:
+        features: pd.DataFrame, target: pd.Series, train_params: TrainParams):
+    model = ModelManager.get_model(train_params.model)
+    if model is None:
         raise NotImplementedError()
     model.fit(features, target)
     return model
 
 
 def predict_model(
-    model: Pipeline, features: pd.DataFrame, use_log_trick: bool = True
+        model: Pipeline, features: pd.DataFrame, use_log_trick: bool = True
 ) -> np.ndarray:
     predicts = model.predict(features)
     if use_log_trick:
@@ -39,7 +35,7 @@ def predict_model(
 
 
 def evaluate_model(
-    predicts: np.ndarray, target: pd.Series, use_log_trick: bool = False
+        predicts: np.ndarray, target: pd.Series, use_log_trick: bool = False
 ) -> Dict[str, float]:
     if use_log_trick:
         target = np.exp(target)
@@ -51,7 +47,7 @@ def evaluate_model(
 
 
 def create_inference_pipeline(
-    model: SklearnRegressionModel, transformer: ColumnTransformer
+        model, transformer: ColumnTransformer
 ) -> Pipeline:
     return Pipeline([("feature_part", transformer), ("model_part", model)])
 

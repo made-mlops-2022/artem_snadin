@@ -1,7 +1,7 @@
 import os
 import marshmallow_dataclass
-from project import download_data, read_pipeline_params
-
+from project import download_data, read_pipeline_params, TrainParams, ModelManager
+import pytest
 CONFIG_PATH = "configs/train_config.yaml"
 
 
@@ -18,3 +18,10 @@ def test_dataset_download():
         assert False
 
     assert os.path.exists(output_path)
+
+
+def test_models_load_error():
+    train_params = TrainParams(model="", model_types=["abracadabra"], random_state=0)
+    with pytest.raises(ValueError):
+        ModelManager.load_models(train_params)
+
