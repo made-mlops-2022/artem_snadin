@@ -1,5 +1,5 @@
 import os
-
+import marshmallow_dataclass
 from project import download_data, read_pipeline_params
 
 CONFIG_PATH = "configs/train_config.yaml"
